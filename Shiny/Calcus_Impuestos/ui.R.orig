@@ -1,0 +1,101 @@
+library(shiny)
+
+## SideBar ----
+Sidebar <- dashboardSidebar(
+## SideBar items ----
+  sidebarMenu(
+    menuItem("Salario", tabName = "Salario", icon = icon("hand-spock-o")),
+    menuItem("Optimizador", tabName = "Optimizador", icon = icon("exchange")),
+    menuItem("Pruebas", tabName = "Pruebas", icon = icon("spinner"))
+  )
+)
+
+## Body ----
+Body <- dashboardBody(
+## Body Items ----
+  tabItems(
+## Body Salario ----
+    tabItem(tabName = "Salario",
+            ## Esta seccion solo funciona con los strings predefinidos
+            ## primary, success, info, warning y se cambia de acuerdo a la necesidad
+            tags$style(HTML("
+                  .box.box-solid.box-info>.box-header {
+                    color:#F72C00;background:#F72C00}
+                  .box.box-solid.box-info{
+                    border-bottom-color:#3ED4C8;
+                    border-left-color:#3ED4C8;
+                    border-right-color:#3ED4C8;
+                    border-top-color:#3ED4C8;}")),
+            h1("Ingresa salario"),
+            fluidRow(width = 12,
+              box(width = 6, solidHeader = TRUE, status = "info", background = "light-blue",
+                selectInput(inputId = "tSalario"
+                            , label = "Tipo de Salario (Quincenal-Mensual)"
+                            , choices = c("Quincenal", "Mensual")
+                            , selected = "Quincenal"),
+                numericInput(inputId = "Salario", label = "Salario del periodo", min = 1
+                             , step = 500, value = 1))),
+            box(width = 8,
+                fluidRow(width = 12, uiOutput("LimInf"))
+<<<<<<< HEAD
+                , fluidRow(width = 12, uiOutput("CuotaFija")))
+=======
+                , fluidRow(width = 12, uiOutput("CuotaFija"))
+                , fluidRow(width = 12, uiOutput("Prueba1"))),
+            box(width = 5
+                , tags$div(class="info-box bg-light-blue", checked=NA
+                           , tags$span(class = "info-box-icon", icon("minus-square")),
+                           tags$div(class="info-box-content",
+                                    tags$span(class ="info-box-text", "Likes"),
+                                    tags$span(class = "info-box-number","41400"),
+                                    tags$div(class = "progress",
+                                             tags$div(class = "progress-bar", style="width: 70%")),
+                                    tags$span(class = "progress-description", "70% Increase in 30 Days")
+                           )
+                  )
+                , progressBox(title = "Prueba", iconBx = "minus-square"
+                              , value = 50, barStatus = 50, description = "subtitulo")
+            )
+>>>>>>> e3f3d7d5388209d9f4336c3488b058e5120101d4
+            # , fluidRow(width = 12,
+            #          tags$head(tags$style(HTML('.small-box {min-height: 25px;} 
+            #                                    .small-box-icon {height: 25px; line-height: 25px;} 
+            #                                    .small-box-content {padding-top: 0px; padding-bottom: 0px;}'))),
+            #   box(width = 8, solidHeader = TRUE, 
+            #     box(width = 8, background = "blue", height = 300,
+            #         "jola"#uiOutput("Prueba3")
+            #         )
+            #       
+            #     )
+            #   )
+    ),
+## Body Optimizador ----
+    tabItem(tabName = "Optimizador",
+            h2("¿Cuanto dinero neto quieres tener?"),
+            tags$div(class = "info-box bg-red")),
+    tabItem(tabName = "Optimizador",
+        h2("¿Cuanto dinero neto quieres tener?"),
+        tags$div(class = "info-box bg-red"),
+        box(width = 5
+            , tags$div(class="info-box bg-light-blue", checked=NA
+                       , tags$span(class = "info-box-icon", icon("minus-square")),
+                       tags$div(class="info-box-content",
+                                tags$span(class ="info-box-text", "Likes"),
+                                tags$span(class = "info-box-number","41400"),
+                                tags$div(class = "progress",
+                                         tags$div(class = "progress-bar", style="width: 70%")),
+                                tags$span(class = "progress-description", "70% Increase in 30 Days")
+                       )
+            )
+            , progressBox(title = "Prueba", iconBx = "minus-square"
+                          , value = 50, barStatus = 50, description = "subtitulo")
+        ))
+  )
+)
+
+# Dashboard Page ----
+ui <- dashboardPage(skin = "blue",
+                    dashboardHeader(title = "Calculadora de Impuestos"),
+                    Sidebar,
+                    Body
+)
